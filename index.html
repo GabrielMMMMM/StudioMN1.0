@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -103,14 +103,25 @@
       <div class="container d-lg-flex align-items-center">
         <div class="hero-text me-lg-5">
           <h1 class="display-5 fw-bold">
-            SEUS CABELOS PRECISAM <br />DOS CUIDADOS  CERTOS
-             
+            SEUS CABELOS PRECISAM <br />DOS CUIDADOS CERTOS
           </h1>
-          <p class="lead ">
-            Oferecemos serviços de corte, coloração, manicure e pedicure com
-            profissionais qualificados.
-          </p>
-          
+          <div class="fdp">
+            <p class="lead">
+              Oferecemos serviços de <span class="highlight">corte</span>,
+              <span class="highlight">coloração</span>,
+              <span class="highlight">manicure</span> e
+              <span class="highlight">pedicure</span> com profissionais
+              qualificados.
+            </p>
+          </div>
+
+          <a
+            href="https://api.whatsapp.com/send?phone=5511919158014&text=Quero%20agendar%20meu%20hor%C3%A1rio!"
+            class="btn btn-dark"
+            target="_blank"
+            ><i class="fab fa-whatsapp" id="botaoPrincipal"></i>Agendar
+            Horário</a
+          >
         </div>
         <div class="hero-image">
           <img src="img/banner.png" alt="Modelo de Cabelo" class="img-fluid" />
@@ -119,50 +130,50 @@
     </div>
     <!--sobre nos-->
     <div id="about-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h3 class="main-title">Conheça o<strong> Studio MN</strong></h3>
-            </div>
-            <div class="col-md-6">
-              <img
-                class="img-fluid"
-                src="img/sobre a empresa.jpeg"
-                alt="StudioMN"
-              />
-            </div>
-            <div class="col-md-6">
-              <h3 class="about-title">Um salão que cuida do seu bem-estar</h3>
-              <p>
-                Nossos serviços são pensados para atender às necessidades e
-                desejos de cada cliente.
-              </p>
-              <p>
-                Após uma análise do seu perfil, nossos especialistas recomendam
-                os melhores produtos e técnicas para realçar sua beleza.
-              </p>
-              <p>
-                E nossa equipe de designers de unhas e cabelos trabalha para que
-                cada detalhe reflita seu estilo.
-              </p>
-              <p></p>
-              <p>Veja outros diferenciais:</p>
-              <ul id="about-list">
-                <li>
-                  <i class="fas fa-check"></i> Utilização de produtos de alta
-                  qualidade
-                </li>
-                <li><i class="fas fa-check"></i> Ambiente Comfortável</li>
-                <li><i class="fas fa-check"></i> Atendimento personalizado</li>
-                <li>
-                  <i class="fas fa-check"></i> Serviços exclusivos de estética 
-                </li>
-                <li><i class="fas fa-check"></i> Profissionais capacitados</li>
-              </ul>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="main-title">Conheça o<strong> Studio MN</strong></h3>
+          </div>
+          <div class="col-md-6 tablet">
+            <img
+              class="img-fluid"
+              src="img/sobre a empresa.jpeg"
+              alt="StudioMN"
+            />
+          </div>
+          <div class="col-md-6 tablet">
+            <h3 class="about-title">Um salão que cuida do seu bem-estar</h3>
+            <p>
+              Nossos serviços são pensados para atender às necessidades e
+              desejos de cada cliente.
+            </p>
+            <p>
+              Após uma análise do seu perfil, nossos especialistas recomendam os
+              melhores produtos e técnicas para realçar sua beleza.
+            </p>
+            <p>
+              E nossa equipe de designers de unhas e cabelos trabalha para que
+              cada detalhe reflita seu estilo.
+            </p>
+            <p></p>
+            <p>Veja outros diferenciais:</p>
+            <ul id="about-list">
+              <li>
+                <i class="fas fa-check"></i> Utilização de produtos de alta
+                qualidade
+              </li>
+              <li><i class="fas fa-check"></i> Ambiente Comfortável</li>
+              <li><i class="fas fa-check"></i> Atendimento personalizado</li>
+              <li>
+                <i class="fas fa-check"></i> Serviços exclusivos de estética
+              </li>
+              <li><i class="fas fa-check"></i> Profissionais capacitados</li>
+            </ul>
           </div>
         </div>
       </div>
+    </div>
     <!--especialidades-->
     <div id="services-area">
       <div class="container">
@@ -174,8 +185,7 @@
             <i class="fas fa-cut fa-3x" aria-hidden="true"></i>
             <h4>Corte de Cabelo</h4>
             <p>
-              Oferecemos cortes de cabelo personalizados para todos
-              os estilos.
+              Oferecemos cortes de cabelo personalizados para todos os estilos.
             </p>
           </div>
           <div class="col-md-6 service-box text-center mb-4">
@@ -202,7 +212,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--case de sucesso-->
     <div id="portfolio-area">
       <div class="container">
@@ -211,88 +221,86 @@
             <h3 class="main-title">Conheça o nosso Trabalho</h3>
           </div>
           <div class="col-md-12" id="filter-btn-box">
-            <button class="main-btn filter-btn active" id="all-btn">
-              Todos
+            <button class="main-btn filter-btn active" id="cortes-btn">
+              Cortes
             </button>
-            <button class="main-btn filter-btn" id="dev-btn">Cortes</button>
-            <button class="main-btn filter-btn" id="dsg-btn">Unhas</button>
+            <button class="main-btn filter-btn" id="unhas-btn">Unhas</button>
           </div>
 
           <!-- Galeria de Imagens -->
-          
-            <div class="col-md-4 project-box dev">
-              <img
-                src="img/cabelo1ponto1.jpg"
-                class="img-fluid gallery-img"
-                alt="cabelo1"
-                data-group="cabelo1"
-              />
-            </div>
-            <div class="col-md-4 project-box dev">
-              <img
-                src="img/cabelo2ponto1.jpg"
-                class="img-fluid gallery-img"
-                alt="cabelo2"
-                data-group="cabelo2"
-              />
-            </div>
-            <div class="col-md-4 project-box dev">
-              <img
-                src="img/cabelo3ponto1.jpg"
-                class="img-fluid gallery-img"
-                alt="cabelo3"
-                data-group="cabelo3"
-              />
-            </div>
-            <div class="col-md-4 project-box dsg">
-              <img
-                src="img/unha1.jpg"
-                class="img-fluid gallery-img"
-                alt="unha1"
-                data-group="unha1"
-              />
-            </div>
-            <div class="col-md-4 project-box dsg">
-              <img
-                src="img/unha2.jpg"
-                class="img-fluid gallery-img"
-                alt="unha2"
-                data-group="unha2"
-              />
-            </div>
-            <div class="col-md-4 project-box dsg">
-              <img
-                src="img/unha3.jpg"
-                class="img-fluid gallery-img"
-                alt="unha3"
-                data-group="unha3"
-              />
-            </div>
-          
+          <div class="col-md-4 project-box cortes">
+            <img
+              src="img/cabelo1ponto1.jpg"
+              class="img-fluid gallery-img"
+              alt="cabelo1"
+              data-group="cortes1"
+            />
+          </div>
+          <div class="col-md-4 project-box cortes">
+            <img
+              src="img/cabelo2ponto1.jpg"
+              class="img-fluid gallery-img"
+              alt="cabelo2"
+              data-group="cortes2"
+            />
+          </div>
+          <div class="col-md-4 project-box cortes">
+            <img
+              src="img/cabelo3ponto1.jpg"
+              class="img-fluid gallery-img"
+              alt="cabelo3"
+              data-group="cortes3"
+            />
+          </div>
+          <div class="col-md-4 project-box unhas">
+            <img
+              src="img/unha1.jpg"
+              class="img-fluid gallery-img"
+              alt="unha1"
+              data-group="unha1"
+            />
+          </div>
+          <div class="col-md-4 project-box unhas">
+            <img
+              src="img/unha2.jpg"
+              class="img-fluid gallery-img"
+              alt="unha2"
+              data-group="unha2"
+            />
+          </div>
+          <div class="col-md-4 project-box unhas">
+            <img
+              src="img/unha3.jpg"
+              class="img-fluid gallery-img"
+              alt="unha3"
+              data-group="unha3"
+            />
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal com Carrossel -->
+    <!-- Modal de Imagem -->
     <div
-      class="modal fade"
+      class="modal fade image-modal"
       id="imageModal"
       tabindex="-1"
       aria-labelledby="imageModalLabel"
       aria-hidden="true"
+      data-bs-touch="true"
     >
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="imageModalLabel">1/10</h5>
+            <h5 class="modal-title" id="imageModalLabel">1/3</h5>
 
             <!-- Botões de controle (Fullscreen, Zoom, Fechar) -->
             <div class="d-flex justify-content-end">
               <button
+                class="fullscreen-btn toolbar-button"
                 onclick="toggleFullscreen()"
-                class="btn btn-secondary toolbar-button"
               >
-                <i class="fas fa-expand"></i>
+                <i class="fa fa-expand"></i>
               </button>
               <button class="btn btn-secondary toolbar-button zoom-btn">
                 <i class="fas fa-search-plus"></i>
@@ -310,13 +318,9 @@
           </div>
 
           <div class="modal-body">
-            <div
-              id="modalCarousel"
-              class="carousel slide"
-              data-bs-ride="false"
-            >
-              <div class="carousel-inner">
-                <!-- As imagens são inseridas dinamicamente via JS -->
+            <div id="modalCarousel" class="carousel slide" data-bs-ride="false">
+              <div class="carousel-inner" id="carouselInner">
+                <!-- As imagens serão inseridas dinamicamente via JS -->
               </div>
 
               <!-- Botões de navegação do carrossel -->
@@ -344,14 +348,19 @@
         </div>
       </div>
     </div>
-     
-      
+
     <!--call area-->
     <div id="call-area">
       <div class="container">
         <div class="row text-center">
           <p>Quer agendar sua sessão de beleza?</p>
-          <a href="https://api.whatsapp.com/send?phone=5511919158014&text=Quero%20agendar%20meu%20hor%C3%A1rio!" class="main-btn" id="call-btn" target="_blank">Agendar</a>
+          <a
+            href="https://api.whatsapp.com/send?phone=5511919158014&text=Quero%20agendar%20meu%20hor%C3%A1rio!"
+            class="main-btn"
+            id="call-btn"
+            target="_blank"
+            >Agendar</a
+          >
         </div>
       </div>
     </div>
@@ -435,14 +444,26 @@
 
           <div class="col-md-4 footer-column">
             <h5 class="footer-heading">Acesso Rápido</h5>
-            <a class="nav-item nav-link footer-link" id="home-menu" href="#">Início</a>
-            <a class="nav-item nav-link footer-link" id="about-menu" href="#">Sobre Nós</a>
-            <a class="nav-item nav-link footer-link" id="especialidades-menu" href="#">Especialidades</a>
-            <a class="nav-item nav-link footer-link" id="services-menu" href="#">Serviços</a>
-            <a class="nav-item nav-link footer-link" id="contact-menu" href="#">Contato</a>
+            <a class="nav-item nav-link footer-link" id="home-menu" href="#"
+              >Início</a
+            >
+            <a class="nav-item nav-link footer-link" id="about-menu" href="#"
+              >Sobre Nós</a
+            >
+            <a
+              class="nav-item nav-link footer-link"
+              id="especialidades-menu"
+              href="#"
+              >Especialidades</a
+            >
+            <a class="nav-item nav-link footer-link" id="services-menu" href="#"
+              >Serviços</a
+            >
+            <a class="nav-item nav-link footer-link" id="contact-menu" href="#"
+              >Contato</a
+            >
           </div>
-          
-          
+
           <div class="col-md-4 footer-column">
             <h5 class="footer-heading">Entre em contato conosco</h5>
             <p class="footer-text contac mobile">

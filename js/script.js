@@ -49,7 +49,8 @@ $(document).ready(function () {
           },
           900 // Velocidade da animação em milissegundos
         );
-      } if (btnId === "about-menu") {
+      }
+      if (btnId === "about-menu") {
         // Rolagem sem ajuste para o botão "Início"
         $("html, body").animate(
           {
@@ -57,7 +58,7 @@ $(document).ready(function () {
           },
           900 // Velocidade da animação em milissegundos
         );
-      }  else {
+      } else {
         // Rolagem com ajuste para outros botões
         $("html, body").animate(
           {
@@ -69,31 +70,30 @@ $(document).ready(function () {
     }
   });
 
-
-  const filterButtons = document.querySelectorAll("#portfolio-area .filter-btn");
+  const filterButtons = document.querySelectorAll(
+    "#portfolio-area .filter-btn"
+  );
   const images = document.querySelectorAll(".project-box");
-  
+
   // Função para filtrar as imagens
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       // Remove a classe 'active' de todos os botões
       filterButtons.forEach((btn) => btn.classList.remove("active"));
-  
+
       // Adiciona a classe 'active' ao botão clicado
       button.classList.add("active");
-  
+
       // Aplica o filtro baseado na categoria do botão clicado
       const category = button.id.replace("-btn", ""); // Extrai a categoria do id do botão
       images.forEach((image) => {
-        if (category === "cortes") {
-          image.style.display = image.classList.contains("cortes") ? "block" : "none"; // Exibe apenas imagens da categoria 'cortes'
-        } else if (category === "unhas") {
-          image.style.display = image.classList.contains("unhas") ? "block" : "none"; // Exibe apenas imagens da categoria 'unhas'
-        }
+        image.style.display = image.classList.contains(category)
+          ? "block"
+          : "none";
       });
     });
   });
-  
+
   // Inicializa a página com o filtro "Cortes" ativo e exibe apenas as imagens da categoria "Cortes"
   document.addEventListener("DOMContentLoaded", () => {
     const activeButton = document.querySelector("#cortes-btn"); // Seleciona o botão "Cortes"
@@ -102,179 +102,250 @@ $(document).ready(function () {
       // Oculta todas as imagens inicialmente
       image.style.display = "none";
     });
-  
+
     // Exibe apenas as imagens da categoria "Cortes" (as 3 primeiras)
     const cortesImages = document.querySelectorAll(".project-box.cortes");
     cortesImages.forEach((image) => {
-      image.style.display = "block"; // Exibe as imagens da categoria "Cortes"
+      image.style.display = "block";
     });
-  }); 
+  });
 });
 
 $(document).ready(function () {
-  const carouselInner = $("#modalCarousel .carousel-inner"); // Container do carrossel
-  const modalLabel = $("#imageModalLabel"); // Título do modal
+  const modalElement = document.getElementById("imageModal");
+  const carouselInner = $("#modalCarousel .carousel-inner");
+  const modalLabel = $("#imageModalLabel");
 
-  // Imagens adicionais para o carrossel (cada grupo de imagens que será adicionado ao carrossel)
-  const additionalImages = {
-    cabelo1: [
+  // Grupos de imagens para os modais
+  const images = {
+    cortes1: [
       "img/cabelo1ponto1.jpg",
       "img/cabelo1ponto2.jpg",
       "img/cabelo1ponto3.jpg",
     ],
-    cabelo2: ["img/cabelo2ponto1.jpg", "img/cabelo2ponto2.jpg"],
-    cabelo3: ["img/cabelo3ponto1.jpg", "img/cabelo3ponto2.jpg"],
+    cortes2: ["img/cabelo2ponto1.jpg", "img/cabelo2ponto2.jpg"],
+    cortes3: ["img/cabelo3ponto1.jpg", "img/cabelo3ponto2.jpg"],
     unha1: ["img/unha1.jpg"],
     unha2: ["img/unha2.jpg"],
     unha3: ["img/unha3.jpg"],
   };
 
-  // Função para carregar todas as imagens no carrossel (de todos os grupos)
-  function loadCarouselImages(startGroup) {
-    carouselInner.empty(); // Limpa o carrossel antes de adicionar novas imagens
+  function loadCarouselImages(group, selectedIndex) {
+    carouselInner.empty();
 
-    let imageCount = 0;
-    let activeIndex = 0;
-
-    // Adiciona todas as imagens de todos os grupos no carrossel
-    for (let group in additionalImages) {
-      const images = additionalImages[group];
-
-      images.forEach((imgSrc, index) => {
-        const imgAlt = imgSrc.split("/").pop(); // Pega o nome do arquivo para ser usado no alt
-
-        // Se a imagem faz parte do grupo clicado, marque a posição correta como "active"
-        const activeClass = group === startGroup && index === 0 ? "active" : "";
-
-        carouselInner.append(`
-          <div class="carousel-item ${activeClass}">
-            <img src="${imgSrc}" class="d-block w-100" alt="${imgAlt}">
-          </div>
-        `);
-
-        // Contabiliza quantas imagens estão sendo adicionadas
-        if (group === startGroup && index === 0) {
-          activeIndex = imageCount; // Define o índice ativo como a primeira imagem do grupo clicado
-        }
-        imageCount++;
-      });
+    if (!images[group]) {
+      console.error("Grupo de imagens não encontrado:", group);
+      return;
     }
 
-    // Retorna o índice da primeira imagem do grupo selecionado
-    return activeIndex; // Retorna o índice da primeira imagem do grupo selecionado
+    const groupImages = images[group];
+    let activeIndex = selectedIndex;
+
+    groupImages.forEach((imgSrc, index) => {
+      const imgAlt = imgSrc.split("/").pop();
+      const activeClass = index === selectedIndex ? "active" : "";
+
+      carouselInner.append(`
+        <div class="carousel-item ${activeClass}">
+          <img src="${imgSrc}" class="d-block w-100" alt="${imgAlt}">
+        </div>
+      `);
+    });
+
+    return activeIndex;
   }
 
-  // Evento de clique em cada imagem da galeria
+  // Evento ao clicar na imagem da galeria
   $(".gallery-img").on("click", function () {
-    const group = $(this).data("group"); // Obtém o grupo (ex: 'cabelo1', 'unha1', etc.)
+    const group = $(this).data("group");
+    const clickedIndex = $(this).index();
 
-    // Carrega todas as imagens no carrossel e retorna o índice da primeira imagem do grupo selecionado
-    const activeIndex = loadCarouselImages(group);
+    const activeIndex = loadCarouselImages(group, clickedIndex);
 
-    // Exibe o modal
-    const modal = new bootstrap.Modal(document.getElementById("imageModal"));
+    const modal = new bootstrap.Modal(modalElement);
     modal.show();
 
-    // Atualiza o carrossel para mostrar a imagem correta
-    $("#modalCarousel .carousel-item").removeClass("active");
-    $("#modalCarousel .carousel-item").eq(activeIndex).addClass("active");
-
-    // Atualiza o título com a imagem correta (remover "Galeria de Imagens" e parênteses)
-    const currentIndex = activeIndex + 1; // +1 porque o índice começa do 0, mas queremos que o título comece de 1
-    const totalImages = 10; // Número fixo de imagens no carrossel (10 imagens)
-    modalLabel.text(`${currentIndex}/${totalImages}`); // Atualiza o título corretamente, sem "Galeria de Imagens" e sem parênteses
+    const currentIndex = activeIndex + 1;
+    const totalImages = carouselInner.children().length;
+    modalLabel.text(`${currentIndex}/${totalImages}`);
   });
 
-  // Atualiza o título do modal conforme o índice da imagem no carrossel
+  // Atualiza o número da imagem ativa quando a navegação do carousel ocorrer
   $("#modalCarousel").on("slid.bs.carousel", function (event) {
-    const currentIndex = $(event.relatedTarget).index() + 1; // Índice atual do carrossel
-    const totalImages = 10; // Número fixo de imagens no carrossel (10 imagens)
-    modalLabel.text(`${currentIndex}/${totalImages}`); // Atualiza o título corretamente, sem "Galeria de Imagens" e sem parênteses
+    const currentIndex = $(event.relatedTarget).index() + 1;
+    const totalImages = carouselInner.children().length;
+    modalLabel.text(`${currentIndex}/${totalImages}`);
   });
-});
-$(".zoom-btn").click(function () {
-  zoomImage(this); // Passa o botão atual como referência
-});
 
-// Função para zoom da imagem
-function zoomImage(button) {
-  const modalImg = document.querySelector(
-    "#modalCarousel .carousel-item.active img"
-  );
+  // Função de zoom nas imagens do modal
+  $(".zoom-btn").click(function () {
+    const modalImg = $("#modalCarousel .carousel-item.active img")[0];
 
-  if (modalImg) {
-    // Alterna entre os estados de zoom
-    const isZoomed = modalImg.classList.contains("zoomed");
+    if (modalImg) {
+      const isZoomed = modalImg.classList.contains("zoomed");
 
-    if (isZoomed) {
-      modalImg.style.transform = "scale(1)"; // Reseta o zoom
-      modalImg.classList.remove("zoomed");
-      button.querySelector("i").classList.remove("fa-search-minus");
-      button.querySelector("i").classList.add("fa-search-plus");
-    } else {
-      modalImg.style.transform = "scale(1.5)"; // Aplica o zoom
-      modalImg.classList.add("zoomed");
-      button.querySelector("i").classList.remove("fa-search-plus");
-      button.querySelector("i").classList.add("fa-search-minus");
+      if (isZoomed) {
+        modalImg.style.transform = "scale(1)";
+        modalImg.classList.remove("zoomed");
+        $(this)
+          .find("i")
+          .removeClass("fa-search-minus")
+          .addClass("fa-search-plus");
+      } else {
+        modalImg.style.transform = "scale(1.5)";
+        modalImg.classList.add("zoomed");
+        $(this)
+          .find("i")
+          .removeClass("fa-search-plus")
+          .addClass("fa-search-minus");
+      }
     }
-  }
-}
-function toggleFullscreen() {
-  const modal = document.getElementById("imageModal");
-  const button = document.querySelector(
-    ".toolbar-button[onclick='toggleFullscreen()']"
-  ); // Localiza o botão
-  const icon = button.querySelector("i"); // Localiza o ícone dentro do botão
+  });
 
-  if (document.fullscreenElement) {
-    // Sai do modo tela cheia
-    document
-      .exitFullscreen()
-      .then(() => {
-        if (icon) {
-          icon.classList.remove("fa-compress"); // Remove o ícone de "sair da tela cheia"
-          icon.classList.add("fa-expand"); // Adiciona o ícone de "entrar em tela cheia"
-        }
-      })
-      .catch((err) =>
-        console.error(`Erro ao sair do modo tela cheia: ${err.message}`)
-      );
-  } else if (modal.classList.contains("show")) {
-    // Entra no modo tela cheia
-    modal
-      .requestFullscreen()
-      .then(() => {
-        if (icon) {
-          icon.classList.remove("fa-expand"); // Remove o ícone de "entrar em tela cheia"
-          icon.classList.add("fa-compress"); // Adiciona o ícone de "sair da tela cheia"
-        }
-      })
-      .catch((err) =>
-        console.error(`Erro ao entrar no modo tela cheia: ${err.message}`)
-      );
-  }
-}
+  window.toggleFullscreen = function () {
+    const modal = document.getElementById("imageModal");
+    const buttonIcon = document.querySelector(".fullscreen-btn i");
 
-$(".fullscreen-btn").click(function () {
-  toggleFullscreen(this); // Passa o botão como referência
-});
-document.addEventListener("DOMContentLoaded", () => {
-  // Seleciona o botão de fechar pelo seletor
-  const closeButton = document.querySelector(
-    ".toolbar-button[data-bs-dismiss='modal']"
-  );
+    if (!buttonIcon) {
+      console.error("Elemento do ícone não encontrado.");
+      return;
+    }
 
-  // Adiciona o evento de clique
-  closeButton.addEventListener("click", () => {
-    // Verifica se está em tela cheia
     if (document.fullscreenElement) {
-      // Sai do modo tela cheia
+      document.exitFullscreen().then(() => {
+        buttonIcon.classList.remove("fa-compress");
+        buttonIcon.classList.add("fa-expand");
+      });
+    } else if (modal.classList.contains("show")) {
+      modal.requestFullscreen().then(() => {
+        buttonIcon.classList.remove("fa-expand");
+        buttonIcon.classList.add("fa-compress");
+      });
+    }
+  };
+
+  // Resetar os ícones e estado de fullscreen ao fechar o modal
+  $("#imageModal").on("hidden.bs.modal", function () {
+    if (document.fullscreenElement) {
       document.exitFullscreen().catch((err) => {
         console.error(`Erro ao sair do modo tela cheia: ${err.message}`);
       });
     }
+
+    $(".zoom-btn i").removeClass("fa-search-minus").addClass("fa-search-plus");
+    const buttonIcon = document.querySelector(".fullscreen-btn i");
+    if (buttonIcon) {
+      buttonIcon.classList.remove("fa-compress");
+      buttonIcon.classList.add("fa-expand");
+    }
   });
 });
+// Selecione o botão de zoom
+// Selecionar o botão de zoom
+const zoomButton = document.querySelector(".zoom-btn");
+const carousels = document.getElementById("modalCarousel");
 
+// Variável para armazenar se o zoom foi ativado
+let isZoomed = false;
 
+// Função para aplicar ou desativar o zoom na imagem
+function toggleZoom() {
+  const carouselItem = carousels.querySelector(".carousel-item.active img");
 
+  // Se a imagem estiver com o zoom, remova o zoom
+  if (isZoomed) {
+    carouselItem.style.transform = "scale(1)";
+    carouselItem.style.transition = "transform 0.3s ease"; // Opcional, para transição suave
+    isZoomed = false;
+    zoomButton.querySelector("i").classList.remove("fa-search-minus");
+    zoomButton.querySelector("i").classList.add("fa-search-plus");
+  } else {
+    // Se o zoom não estiver ativado, ative-o
+    carouselItem.style.transform = "scale(1.5)"; // Ajuste o valor do zoom conforme necessário
+    carouselItem.style.transition = "transform 0.3s ease"; // Opcional, para transição suave
+    isZoomed = true;
+    zoomButton.querySelector("i").classList.remove("fa-search-plus");
+    zoomButton.querySelector("i").classList.add("fa-search-minus");
+  }
+}
+
+// Detecta quando o carrossel muda de imagem
+carousels.addEventListener("slid.bs.carousel", function () {
+  // Reseta o estado do zoom quando a imagem for trocada
+  resetZoom();
+});
+
+// Função para resetar o zoom
+function resetZoom() {
+  const carouselItem = carousel.querySelector(".carousel-item.active img");
+  carouselItem.style.transform = "scale(1)"; // Reseta o zoom para o estado original
+  isZoomed = false; // Marca que o zoom foi desativado
+  zoomButton.querySelector("i").classList.remove("fa-search-minus");
+  zoomButton.querySelector("i").classList.add("fa-search-plus"); // Troca o ícone de volta
+}
+
+// Adiciona evento de clique ao botão de zoom
+zoomButton.addEventListener("click", toggleZoom);
+
+const carousel = document.querySelector("#modalCarousel");
+
+let startX;
+
+carousel.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX; // Coordenada inicial do toque
+});
+
+carousel.addEventListener("touchmove", (e) => {
+  if (!startX) return;
+  let deltaX = e.touches[0].clientX - startX;
+
+  if (deltaX > 50) {
+    // Gesto para a direita (slide anterior)
+    bootstrap.Carousel.getInstance(carousel).prev();
+    startX = null;
+  } else if (deltaX < -50) {
+    // Gesto para a esquerda (próximo slide)
+    bootstrap.Carousel.getInstance(carousel).next();
+    startX = null;
+  }
+});
+const carouselElement = document.querySelector("#modalCarousel");
+if (!bootstrap.Carousel.getInstance(carouselElement)) {
+  const carousel = new bootstrap.Carousel(carouselElement);
+}
+if (carouselElement) {
+  let startX = null;
+
+  carouselElement.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX; // Coordenada inicial do toque
+  });
+
+  carouselElement.addEventListener("touchmove", (e) => {
+    if (!startX) return;
+
+    const deltaX = e.touches[0].clientX - startX;
+
+    const carouselInstance = bootstrap.Carousel.getInstance(carouselElement);
+
+    if (carouselInstance) {
+      if (deltaX > 50) {
+        carouselInstance.prev(); // Gesto para a direita
+      } else if (deltaX < -50) {
+        carouselInstance.next(); // Gesto para a esquerda
+      }
+    }
+
+    startX = null;
+  });
+}
+// Quando o modal abrir, adicionar a classe "modal-active" ao html e body
+$("#imageModal").on("show.bs.modal", function () {
+  $("html").addClass("modal-active");
+  $("body").addClass("modal-active");
+});
+
+// Quando o modal for fechado, remover a classe "modal-active"
+$("#imageModal").on("hidden.bs.modal", function () {
+  $("html").removeClass("modal-active");
+  $("body").removeClass("modal-active");
+});

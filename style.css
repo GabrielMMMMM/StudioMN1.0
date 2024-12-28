@@ -56,12 +56,58 @@ body {
   z-index: 2; /* Garante que o título fique acima do overlay */
 }
 
+.hero-text {
+  display: flex; /* Ativa o Flexbox */
+  flex-direction: column; /* Alinha os elementos verticalmente */
+  align-items: flex-start; /* Alinha o conteúdo à esquerda */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  height: 200px; /* Altura fixa do contêiner */
+  text-align: left; /* Alinha o texto à esquerda */
+  overflow: visible;
+}
+
+.hero-text h1 {
+  color: rgb(0, 0, 0);
+  position: relative; /* Garante que esteja acima do overlay */
+  z-index: 2;
+  white-space: nowrap; /* Impede que o texto quebre */
+  font-size: 2.5rem; /* Ajusta o tamanho da fonte */
+  margin: 0; /* Remove margens extras */
+}
+.hero-text .fdp {
+  width: 100%;
+  z-index: 2;
+}
 .hero-text p {
-  color: #333333;
-  position: relative; /* Coloca o subtítulo acima do overlay */
-  z-index: 2; /* Garante que o subtítulo fique acima do overlay */
-  font-weight: 300;
-  display: block;
+  color: rgb(0, 0, 0); /* Torna o texto do parágrafo preto */
+  /* Ajuste opcional do tamanho da fonte */
+  margin-top: 10px; /* Espaçamento superior, caso necessário */
+  z-index: 2;
+  font-weight: 400;
+  width: 84%;
+}
+
+.highlight {
+  color: #fbff07;
+}
+
+.hero-text a {
+  display: inline-block; /* Garante que o botão tenha comportamento de bloco */
+  background-color: #000000; /* Fundo amarelo para o botão */
+  color: rgb(255, 255, 255); /* Texto preto no botão */
+  padding: 10px 20px; /* Ajusta o espaçamento interno do botão */
+  border: none; /* Remove bordas do botão */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 1.2rem; /* Ajusta o tamanho da fonte do botão */
+  /* Torna o texto do botão em negrito */
+  text-decoration: none; /* Remove sublinhado do link */
+  transition: all 0.3s ease-in-out; /* Animação suave ao passar o mouse */
+  z-index: 2;
+}
+
+.hero-text a:hover {
+  background-color: black; /* Fundo preto ao passar o mouse */
+  color: #f9e065; /* Texto amarelo ao passar o mouse */
 }
 
 .hero-image {
@@ -309,7 +355,6 @@ body {
   padding-top: 5rem; /* Espaço para o header */
   padding-bottom: 5rem; /* Espaço para o footer */
 }
-
 .carousel-control-prev,
 .carousel-control-next {
   background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
@@ -320,20 +365,61 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 0; /* Remove bordas arredondadas */
+  z-index: 100;
+  transition: background-color 0.2s ease; /* Efeito de transição para cor ao clicar */
 }
 
-/* Posiciona o botão "prev" na ponta esquerda do modal-body */
+/* Quando o botão é pressionado, ele muda de cor, mas não mexe */
+.carousel-control-prev:active,
+.carousel-control-next:active {
+  background-color: rgba(0, 0, 0, 0.7); /* Cor mais escura ao clicar */
+  transform: translateY(-50%); /* Garante que a posição não se altere */
+}
+
+/* Posiciona o botão "prev" na ponta esquerda */
 .carousel-control-prev {
-  left: -25em; /* Ajuste para posicionar o botão um pouco dentro da borda esquerda */
+  left: 15em;
 }
 
-/* Posiciona o botão "next" na ponta direita do modal-body */
+/* Posiciona o botão "next" na ponta direita */
 .carousel-control-next {
-  right: -25em; /* Ajuste para posicionar o botão um pouco dentro da borda direita */
+  right: 15em;
+}
+
+/* Estilo para o modal */
+/* Estilo para o modal */
+.modal {
+  overflow: hidden; /* Impede a rolagem dentro do modal */
+}
+
+/* Quando o modal está ativo, o conteúdo do body e html não pode rolar */
+.modal-active,
+html.modal-active,
+body.modal-active {
+  overflow: hidden;
+  height: 100%; /* Garantir que a altura total da tela seja ocupada */
+}
+
+/* Garantir que o modal tenha um fundo transparente e sem rolagem */
+.modal-dialog {
+  overflow: hidden; /* Impede que o conteúdo do modal transborde */
+}
+
+/* Para o modal especificamente, também garantir que não tenha rolagem */
+.modal.fade {
+  overflow: hidden;
+}
+
+/* Para a página inteira (garantir que o scroll do site não apareça enquanto o modal está aberto) */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 /* call area */
@@ -551,67 +637,119 @@ footer {
   height: 20px;
 }
 /* Responsividade para telas medias (tablet) */
-@media only screen and (min-width: 769px) and (max-width: 990px) {
-    /* Gerais */
-    .main-title {
-      font-size: 2.5rem; /* Aumenta um pouco o tamanho da fonte */
-      margin-bottom: 50px; /* Ajusta a margem inferior */
-    }
-  
-    .main-title::after {
-      border-top: 3px solid #333; /* Linha decorativa mais espessa */
-      width: 40%; /* Aumenta a largura da linha */
-    }
-  
-   
-  
-    /* Especialidades */
-    #services-area p {
-      font-size: 17px; /* Aumenta um pouco o tamanho do texto */
-    }
-  
-    
-    /* Call area */
-    #call-area {
-      padding: 20px; /* Aumenta o padding */
-    }
-  
-    #call-area p {
-      font-size: 30px; /* Texto levemente maior */
-    }
-  
-    #call-area #call-btn {
-      font-size: 25px; /* Aumenta o tamanho do botão */
-      padding: 10px 20px; /* Ajuste do preenchimento do botão */
-    }
-  
-   
-    
-  
-    /* Footer */
-    #final .footer-text {
-      text-align: left;
-      width: 110%;
-      height: 40%;
-      margin-bottom: 25px;
-    }
-   
-    #final .mobile {
-      height: 50px;
-      font-size: 16px;
-    }
-    #final .b {
-      margin-top: -15px;
-    }
-    .footer-note {
-      font-size: 13px;
-      padding-top: 10px;
-    }
-    .footer-icons{
-      padding-top: 20%;
-    }
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  /* Gerais */
+  .main-title {
+    font-size: 2.5rem; /* Aumenta um pouco o tamanho da fonte */
+    margin-bottom: 50px; /* Ajusta a margem inferior */
   }
-  
+
+  /* home  */
+  .main-title::after {
+    border-top: 3px solid #333; /* Linha decorativa mais espessa */
+    width: 40%; /* Aumenta a largura da linha */
+  }
+
+  #home .container {
+    display: flex;
+    flex-direction: row; /* Garante que os itens fiquem lado a lado */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #home .hero-text {
+    margin-right: 20px; /* Espaço entre texto e imagem */
+    flex: 1;
+  }
+  .hero-text h1 {
+    font-size: 2rem; /* Ajusta o tamanho da fonte */
+  }
+  .hero-text .fdp {
+    width: 114%;
+    z-index: 2;
+  }
+  #home .hero-image img {
+    max-width: 100%; /* Ajusta imagem ao container */
+    height: auto; /* Mantém proporção */
+    flex: 1;
+  }
+  /* sobre nos */
+  #about-area .row {
+    display: flex;
+    flex-direction: column; /* Empilha os elementos em uma coluna por padrão */
+    align-items: center;
+  }
+  .tablet {
+    flex: 0 0 auto;
+    width: 80%;
+  }
+
+  #about-area .img-fluid {
+    margin-bottom: 30px;
+  }
+  /* Especialidades */
+  #services-area p {
+    font-size: 17px; /* Aumenta um pouco o tamanho do texto */
+  }
+  /* modal */
+  #modalCarousel .carousel-item img {
+    max-height: 75vh;
+    object-fit: contain;
+    margin-top: -1vh;
+  }
+
+  #modalCarousel {
+    margin-bottom: 1rem; /* Espaço abaixo das imagens para os botões */
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: fixed; /* Remove a posição absoluta */
+    margin-top: 1em; /* Adiciona espaço acima dos botões */
+  }
+
+  .carousel-control-prev {
+    left: 5em; /* Alinha o botão "anterior" à esquerda */
+  }
+
+  .carousel-control-next {
+    right: 5em; /* Alinha o botão "próximo" à direita */
+  }
+
+  /* Call area */
+
+  #call-area p {
+    font-size: 30px; /* Texto levemente maior */
+  }
+
+  #call-area #call-btn {
+    font-size: 25px; /* Aumenta o tamanho do botão */
+    padding: 10px 20px; /* Ajuste do preenchimento do botão */
+  }
+
+  /* Footer */
+  #final .footer-text {
+    text-align: left;
+    width: 110%;
+    height: 40%;
+    margin-bottom: 25px;
+  }
+
+  #final .mobile {
+    height: 50px;
+    font-size: 16px;
+  }
+  #final .b {
+    margin-top: -15px;
+  }
+  .footer-note {
+    font-size: 13px;
+    padding-top: 10px;
+  }
+  .footer-icons {
+    padding-top: 20%;
+  }
+}
 
 /* Responsividade para telas pequenas (celulares) */
 @media only screen and (max-width: 768px) {
@@ -643,7 +781,73 @@ footer {
   #services-area p {
     font-size: 15px;
   }
+  /*home */
+  #home{
+    height: fit-content;
+  }
+  #home .container {
+    display: flex;
+    flex-direction: row; /* Garante que os itens fiquem lado a lado */
+    align-items: center;
+    justify-content: space-between;
+  }
 
+  #home .hero-text {
+    margin-right: 20px; /* Espaço entre texto e imagem */
+    flex: 1;
+    width:50%;
+    height: fit-content;
+    
+  }
+  .hero-text h1 {
+    position: relative;
+    font-size: clamp(1.3rem, 5vw, 2rem);
+    /* Ajusta o tamanho da fonte */
+    height: fit-content;
+    width: 100%;
+    white-space: normal;
+    
+    margin-bottom: 10px;
+  }
+  .hero-text .fdp {
+    width: 114%;
+    z-index: 2;
+  }
+  #home .hero-image img {
+    width: 100%; /* Ajusta imagem ao container */
+    height: auto; /* Mantém proporção */
+    flex: 1;
+  }
+  .hero-text p {
+     /* Ajusta o tamanho do texto */
+    display: none; /* Exibe o parágrafo */
+  }
+
+  .hero-image {
+    width: 50%; /* Faz a imagem ocupar toda a largura do contêiner */
+    overflow: hidden; /* Impede que a imagem ultrapasse os limites do contêiner */
+    height: fit-content;
+  }
+
+  .hero-image img {
+    width: 100%; /* A imagem ocupa toda a largura do contêiner */
+    height: fit-content; /* A imagem preenche a altura do contêiner */
+    object-fit: cover; /* A imagem se ajusta ao tamanho do contêiner sem distorcer */
+    margin: 0; /* Remove qualquer margem */
+    padding: 0; /* Remove qualquer padding */
+  }
+
+  /* Ajuste do botão */
+  .hero-text a {
+    font-size: clamp(0.8rem, 2.5vw, 1.3rem); /* Tamanho do texto do botão responsivo */
+    padding: 5px 10px; /* Padding ajustado, se necessário */
+  }
+  
+  .hero-text a i {
+    font-size: clamp(0.9rem, 2.8vw, 1.4rem); /* Tamanho do ícone responsivo */
+  }
+  
+  
   /* case de sucesso */
   .project-box {
     text-align: center; /* Centraliza o conteúdo dentro das caixas de imagem */
@@ -658,8 +862,68 @@ footer {
     height: auto; /* Mantém a proporção da imagem */
     margin: 0 auto; /* Garante que a imagem fique centralizada */
   }
+  #portfolio-area .filter-btn {
+    margin: 0px 3px;
+  }
 
   /* modal */
+  #modalCarousel .carousel-item img {
+    max-height: 75vh;
+    object-fit: contain;
+  }
+
+  /* Remove o padding lateral do modal fade */
+  .modal {
+    padding-right: 0 !important;
+    padding-left: 0;
+  }
+
+  /* Remove o padding inferior do modal body */
+
+  .modal-body {
+    height: 100vh;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column; /* Garante que o conteúdo seja empilhado */
+    align-items: center; /* Centraliza imagens e botões */
+    flex: 1;
+  }
+  .modal-dialog {
+    height: 100%; /* Faz com que ocupe toda a altura disponível no modal */
+    margin: 0; /* Remove margens */
+    width: 100%; /* Garante que ocupe a largura total */
+    max-width: none; /* Remove o limite de largura */
+  }
+  .modal-content {
+    height: 100%; /* Faz com que o modal-body tenha espaço total */
+    display: flex; /* Flexbox para permitir o ajuste dos filhos */
+    flex-direction: column; /* Mantém a hierarquia vertical */
+  }
+
+  #modalCarousel {
+    margin-bottom: 1rem; /* Espaço abaixo das imagens para os botões */
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    position: fixed; /* Posiciona os botões dentro do carrossel */
+    margin-top: 1em; /* Espaço acima dos botões */
+  }
+
+  /* Ajuste da margem no carrossel para o espaço dos botões */
+  .carousel-inner {
+    margin-bottom: 2em; /* Espaço para os botões */
+  }
+
+  /* Botão "prev" à esquerda */
+  .carousel-control-prev {
+    left: 0; /* Posiciona na borda esquerda */
+  }
+
+  /* Botão "next" à direita */
+  .carousel-control-next {
+    right: 0; /* Posiciona na borda direita */
+  }
 
   /* call area */
   #call-area {
@@ -669,6 +933,7 @@ footer {
 
   #call-area p {
     font-size: 16px; /* Texto menor */
+    word-wrap: break-word;
   }
 
   #call-area #call-btn {
@@ -677,7 +942,9 @@ footer {
     margin-left: 0; /* Centraliza em telas menores */
     border-radius: 20px; /* Reduz o arredondamento */
   }
-  
+  #call-area .container {
+    padding: 0px 0px;
+  }
   /* contatos */
   .contact-box i {
     color: #444;
@@ -706,10 +973,10 @@ footer {
   #final .footer-text {
     text-align: justify;
     width: 95%;
-    height: 110px;
-    margin-bottom: 25px;
+    height: fit-content;
+    
   }
- 
+
   #final .mobile {
     height: 50px;
     font-size: 16px;
@@ -720,5 +987,27 @@ footer {
   .footer-note {
     font-size: 13px;
     padding-top: 10px;
+  }
+}
+
+@media (min-width: 405px) and (max-width: 547px) {
+  #call-area .container {
+    padding: 3px 60px;
+  }
+}
+
+@media (max-width: 374px) {
+  .hero-text a {
+    font-size: 10px; /* Tamanho do texto do botão responsivo */
+    padding: 5px 10px; /* Padding ajustado, se necessário */
+  }
+  
+  .hero-text a i {
+    font-size: 10px; /* Tamanho do ícone responsivo */
+  }
+  .hero-text h1 {
+  
+    font-size: 18px;
+   
   }
 }
