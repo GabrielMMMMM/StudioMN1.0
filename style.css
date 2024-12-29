@@ -637,13 +637,15 @@ footer {
   height: 20px;
 }
 /* Responsividade para telas medias (tablet) */
-@media only screen and (min-width: 769px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   /* Gerais */
   .main-title {
     font-size: 2.5rem; /* Aumenta um pouco o tamanho da fonte */
     margin-bottom: 50px; /* Ajusta a margem inferior */
   }
-
+  .esconder{
+    display: none;
+  }
   /* home  */
   .main-title::after {
     border-top: 3px solid #333; /* Linha decorativa mais espessa */
@@ -692,10 +694,31 @@ footer {
     font-size: 17px; /* Aumenta um pouco o tamanho do texto */
   }
   /* modal */
-  #modalCarousel .carousel-item img {
-    max-height: 75vh;
-    object-fit: contain;
-    margin-top: -1vh;
+  .modal {
+    padding-right: 0 !important;
+    padding-left: 0;
+  }
+
+  /* Remove o padding inferior do modal body */
+
+  .modal-body {
+    height: 100vh;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column; /* Garante que o conteúdo seja empilhado */
+    align-items: center; /* Centraliza imagens e botões */
+    flex: 1;
+  }
+  .modal-dialog {
+    height: 100%; /* Faz com que ocupe toda a altura disponível no modal */
+    margin: 0; /* Remove margens */
+    width: 100%; /* Garante que ocupe a largura total */
+    max-width: none; /* Remove o limite de largura */
+  }
+  .modal-content {
+    height: 100%; /* Faz com que o modal-body tenha espaço total */
+    display: flex; /* Flexbox para permitir o ajuste dos filhos */
+    flex-direction: column; /* Mantém a hierarquia vertical */
   }
 
   #modalCarousel {
@@ -704,17 +727,25 @@ footer {
 
   .carousel-control-prev,
   .carousel-control-next {
-    position: fixed; /* Remove a posição absoluta */
-    margin-top: 1em; /* Adiciona espaço acima dos botões */
+    position: fixed; /* Posiciona os botões dentro do carrossel */
+    margin-top: 1em; /* Espaço acima dos botões */
   }
 
+  /* Ajuste da margem no carrossel para o espaço dos botões */
+  .carousel-inner {
+    margin-bottom: 2em; /* Espaço para os botões */
+  }
+
+  /* Botão "prev" à esquerda */
   .carousel-control-prev {
-    left: 5em; /* Alinha o botão "anterior" à esquerda */
+    left: 0; /* Posiciona na borda esquerda */
   }
 
+  /* Botão "next" à direita */
   .carousel-control-next {
-    right: 5em; /* Alinha o botão "próximo" à direita */
+    right: 0; /* Posiciona na borda direita */
   }
+
 
   /* Call area */
 
@@ -769,30 +800,29 @@ footer {
     left: 50%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Corrige o deslocamento para centralizar */
   }
+  .esconder{
+    display: none;
+  }
   /* sobre nos */
   #about-area img {
-    max-width: 100%;
+    max-width: 90%;
     margin-bottom: 26px;
     display: block;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: auto;
   }
- 
-
-  /* Texto aparece primeiro */
-  #about-area .col-md-6:nth-child(2) {
-    order: 1; /* Texto vem primeiro */
+  #about-area .carousel-inner {
+    margin-bottom: 0; /* Espaço para os botões */
+  }
+  #about-area p{
+    text-align: justify;
+  }
+  .timobile{
+    
+    text-align: center;
   }
 
-  /* Imagem aparece depois */
-  #about-area .col-md-6:nth-child(1) {
-    order: 2; /* Imagem vai depois do texto */
-  }
-
-  /* Diferenciais aparecem por último */
-  #about-area .col-md-6:nth-child(3) {
-    order: 3; /* Diferenciais aparecem no final */
-  }
+  
   /*especialidades */
   #services-area p {
     font-size: 15px;
