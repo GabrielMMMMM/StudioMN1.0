@@ -689,6 +689,17 @@ footer {
   #about-area .img-fluid {
     margin-bottom: 30px;
   }
+  #about-area .carousel-inner {
+    margin-bottom: 0; /* Espaço para os botões */
+  }
+  #about-area p{
+    text-align: justify;
+  }
+  .timobile{
+    
+    text-align: center;
+  }
+
   /* Especialidades */
   #services-area p {
     font-size: 17px; /* Aumenta um pouco o tamanho do texto */
