@@ -1,3 +1,4 @@
+
 /* gerais */
 body {
   font-family: "Roboto", sans-serif;
@@ -531,38 +532,51 @@ body {
 footer {
   background-color: #000;
 }
+/* Altera a cor do strong ao passar o mouse */
+footer .footer-column p strong {
+  transition: color 0.3s ease;
+}
+
+/* Define a nova cor quando o mouse passar sobre o strong */
+footer .footer-column p strong:hover {
+  color: #f9e065; /* Altere para a cor desejada */
+}
+
 #final {
   background-color: #000;
-  padding: 40px 10px;
+  padding: 0px 10px 40px 10px;
   color: #ffffff;
   font-size: 16px;
 }
 
 .footer-column {
   margin-bottom: 20px;
+  padding: 40px 30px 0px 30px;
 }
 
 .footer-heading {
   color: #f9e065;
   font-size: 22px;
   font-weight: bold;
+  text-align: center;
   margin-bottom: 15px;
 }
 
 .footer-text {
-  width: 290px; /* Largura fixa */
-  height: 114px; /* Altura fixa */
+   /* Largura fixa */
+  height: fit-content; /* Altura fixa */
   font-size: 16px;
   color: #ffffff;
   line-height: 1.6;
 
-  text-align: justify;
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .footer-icons {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 .footer-icons a {
   text-decoration: none;
@@ -624,8 +638,9 @@ footer {
   text-decoration: none;
   color: #444;
 }
-.contac {
-  height: 47px;
+.finals{
+  padding: 0px 55px;
+  
 }
 /* Copyright */
 .footer-note {
@@ -690,7 +705,7 @@ footer {
     margin-bottom: 30px;
   }
   #about-area .carousel-inner {
-    margin-bottom: 0; /* Espaço para os botões */
+    margin-bottom: 1em; /* Espaço para os botões */
   }
   #about-area p{
     text-align: justify;
@@ -771,15 +786,16 @@ footer {
 
   /* Footer */
   #final .footer-text {
-    text-align: left;
-    width: 110%;
-    height: 40%;
-    margin-bottom: 25px;
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    
   }
 
   #final .mobile {
     height: 50px;
     font-size: 16px;
+    text-align: center;
   }
   #final .b {
     margin-top: -15px;
@@ -789,13 +805,24 @@ footer {
     padding-top: 10px;
   }
   .footer-icons {
-    padding-top: 20%;
+    padding-top: 10%;
+  }
+  .footer-column {
+    padding: 20px;
+  }
+  .finals{
+    padding: 0px 0px;
+    
   }
 }
 
 /* Responsividade para telas pequenas (celulares) */
 @media only screen and (max-width: 768px) {
   /* garais */
+  .finals{
+    padding: 0px 0px;
+    
+  }
   .main-title {
     font-size: 2rem; /* Diminui o tamanho da fonte */
     margin-bottom: 40px; /* Ajusta a margem inferior */
@@ -1028,15 +1055,15 @@ footer {
   }
   /* footer */
   #final .footer-text {
-    text-align: justify;
-    width: 95%;
+    text-align: center;
+    width: 100%;
     height: fit-content;
     
   }
 
   #final .mobile {
-    height: 50px;
-    font-size: 16px;
+    height: fit-content;
+    font-size: 14px;
   }
   #final .b {
     margin-top: -30px;
@@ -1044,6 +1071,10 @@ footer {
   .footer-note {
     font-size: 13px;
     padding-top: 10px;
+  }
+
+  .footer-column{
+    padding: 20px 30px;
   }
 }
 
@@ -1066,5 +1097,15 @@ footer {
   
     font-size: 18px;
    
+  }
+}
+@media (max-width: 375px) {
+  .footer-note {
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  #final .mobile {
+    
+    font-size: 13px;
   }
 }
